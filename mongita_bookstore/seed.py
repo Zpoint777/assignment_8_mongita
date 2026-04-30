@@ -6,8 +6,11 @@ client = MongitaClientDisk(os.path.join(BASE_DIR, "mongita_data"))
 
 db = client.bookstore
 
-categories_col = db.category
-books_col = db.book
+#Changed
+categories_col = db.categories
+books_col = db.books
+
+
 
 # Reset collections
 categories_col.delete_many({})

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block container %}
+<main style="padding: 20px;">
+    <h2>Bookstore Maintenance - All Books</h2>
+    <p>
+        <a href="{{ url_for('create') }}" class="actionButton" style="background-color: #28a745; width: auto; padding: 10px 20px; display: inline-block; white-space: nowrap; text-decoration: none;">
+            + Add New Book
+        </a>
+    </p>
+    
+    <table border="1" style="width:100%; border-collapse: collapse; margin-top: 20px;">
+        <thead style="background-color: #f2f2f2;">
+            <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td style="text-align:center;">
+                    <img src="{{ url_for('static', filename='images/books/' + book.image) }}" alt="{{ book.title }}" style="width:50px;">
+                </td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.categoryName }}</td>
+                <td>${{ "%.2f"|format(book.price) }}</td>
+                <td style="text-align:center;">
+                    <a href="{{ url_for('edit', bookId=book.bookId) }}">Edit</a> | 
+                    <a href="{{ url_for('delete', bookId=book.bookId) }}" style="color:red;" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}
